@@ -2,7 +2,7 @@ from django.db import models
 from core import models as core_models
 
 
-class ReviewModel(core_models.TimeStampedModel):
+class Review(core_models.TimeStampedModel):
 
     """Review Model Definition"""
 
