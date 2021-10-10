@@ -23,3 +23,14 @@ class Review(core_models.TimeStampedModel):
 
     def __str__(self):
         return f"{self.room} from {self.user.username}"
+
+    def rating_average(self):
+        avg = (
+            self.accuracy
+            + self.communication
+            + self.clearliness
+            + self.location
+            + self.check_in
+            + self.value
+        ) / 6
+        return round(avg, 2)
