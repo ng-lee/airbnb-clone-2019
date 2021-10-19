@@ -6,13 +6,27 @@ class Review(core_models.TimeStampedModel):
 
     """Review Model Definition"""
 
+    RATE_ONE = 1
+    RATE_TWO = 2
+    RATE_THREE = 3
+    RATE_FOUR = 4
+    RATE_FIVE = 5
+
+    RATE_CHOICES = (
+        (RATE_ONE, "1"),
+        (RATE_TWO, "2"),
+        (RATE_THREE, "3"),
+        (RATE_FOUR, "4"),
+        (RATE_FIVE, "5"),
+    )
+
     review = models.TextField()
-    accuracy = models.IntegerField()
-    communication = models.IntegerField()
-    clearliness = models.IntegerField()
-    location = models.IntegerField()
-    check_in = models.IntegerField()
-    value = models.IntegerField()
+    accuracy = models.IntegerField(choices=RATE_CHOICES)
+    communication = models.IntegerField(choices=RATE_CHOICES)
+    clearliness = models.IntegerField(choices=RATE_CHOICES)
+    location = models.IntegerField(choices=RATE_CHOICES)
+    check_in = models.IntegerField(choices=RATE_CHOICES)
+    value = models.IntegerField(choices=RATE_CHOICES)
 
     user = models.ForeignKey(
         "users.User", related_name="reviews", on_delete=models.CASCADE
@@ -22,7 +36,7 @@ class Review(core_models.TimeStampedModel):
     )
 
     def __str__(self):
-        return f"{self.room} from {self.user.username}"
+        return self.room.name
 
     def rating_average(self):
         avg = (

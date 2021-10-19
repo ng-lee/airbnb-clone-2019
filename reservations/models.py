@@ -18,7 +18,8 @@ class Reservation(core_models.TimeStampedModel):
     )
 
     status = models.CharField(
-        max_length=10, choices=STATUS_CHOICE, default=STATUS_PENDING
+        max_length=10,
+        choices=STATUS_CHOICE,
     )
     check_in = models.DateField()
     check_out = models.DateField()
@@ -35,7 +36,7 @@ class Reservation(core_models.TimeStampedModel):
 
     def is_progress(self):
         now = timezone.now().date()
-        return now > self.check_in and now < self.check_out
+        return now >= self.check_in and now <= self.check_out
 
     is_progress.boolean = True
 

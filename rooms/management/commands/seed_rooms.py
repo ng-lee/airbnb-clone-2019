@@ -49,7 +49,7 @@ class Command(BaseCommand):
             room = room_models.Room.objects.get(pk=pk)
             for _ in range(2, random.randint(5, 16)):
                 room_models.Photo.objects.create(
-                    caption=seeder.faker.sentence,
+                    caption=seeder.faker.sentence(),
                     room=room,
                     file=f"room_photo/{random.randint(1, 31)}.webp",
                 )
