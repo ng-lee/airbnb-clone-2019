@@ -39,6 +39,11 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+THIRD_PARTY_APP = [
+    "django_countries",
+    "django_seed",
+]
+
 PROJECT_APPS = [
     "core.apps.CoreConfig",
     "rooms.apps.RoomsConfig",
@@ -49,12 +54,7 @@ PROJECT_APPS = [
     "conversations.apps.ConversationsConfig",
 ]
 
-THIRD_PARTY_APP = [
-    "django_countries",
-    "django_seed",
-]
-
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APP
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
