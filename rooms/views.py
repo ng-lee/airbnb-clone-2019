@@ -33,9 +33,23 @@ def room_detail(request, pk):
 def search(request):
     city = request.GET.get("city", "Anywhere")
     city = str.capitalize(city)
+    selected_country_code = request.GET.get("country", "KR")
+    selected_room_type_pk = int(request.GET.get("room_type", 0))
     room_types = models.RoomType.objects.all()
+
+    form = {
+        "city": city,
+        "selected_country_code": selected_country_code,
+        "selected_room_type_pk": selected_room_type_pk,
+    }
+
+    choices = {
+        "countries": countries,
+        "room_types": room_types,
+    }
+
     return render(
         request,
         "rooms/search.html",
-        {"city": city, "countries": countries, "room_types": room_types},
+        {**form, **choices},
     )
