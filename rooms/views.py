@@ -3,6 +3,7 @@ from django.http import Http404
 from django.views.generic import ListView
 from django.shortcuts import render
 from django_countries import countries
+from django_countries.fields import country_to_text
 from . import models
 
 
@@ -71,8 +72,20 @@ def search(request):
         "facilities": facilities,
     }
 
+    filter_args = {}
+
+    if city != "Anywhere":
+        filter_args["city__startswith"] = city
+
+    filter_args["country"] = selected_country_code
+
+    if selected_room_type_pk != 0:
+        filter_args["room_type__pk"] = selected_room_type_pk
+
+    rooms = models.Room.objects.filter(**filter_args)
+
     return render(
         request,
         "rooms/search.html",
-        {**form, **choices},
+        {**form, **choices, "rooms": rooms},
     )
