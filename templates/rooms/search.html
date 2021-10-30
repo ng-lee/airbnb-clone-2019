@@ -54,12 +54,20 @@
             <input value="{{baths}}" type="number" id="baths" name="baths" placeholder="Baths" >
         </div>
         <div>
+            <label for="instant">Instant Book Only?</label>
+            <input type="checkbox" name="instant" id="instant" {% if instant %}checked{% endif %}>
+        </div>
+        <div>
+            <label for="super_host">By Super Host Only?</label>
+            <input type="checkbox" name="super_host" id="super_host" {% if super_host %}checked{% endif %}>
+        </div>
+        <div>
             <h3>Amenity</h3>
             <ul>
                 {% for amenity in amenities %}
                     <li>
                         <label for="a_{{amenity.pk}}">{{amenity.name}}</label>
-                        <input type="checkbox" name="amenities" id="a_{{amenity.pk}}" value="{{amenity.pk}}">
+                        <input type="checkbox" name="amenities" id="a_{{amenity.pk}}" value="{{amenity.pk}}" {% if amenity.pk|slugify in selected_amenities %}checked{% endif %}>
                     </li>
                 {% endfor %}
             </ul>
@@ -70,7 +78,7 @@
                 {% for facility in facilities %}
                     <li>
                         <label for="f_{{facility.pk}}">{{facility.name}}</label>
-                        <input type="checkbox" name="facilities" id="f_{{facility.pk}}">
+                        <input type="checkbox" name="facilities" id="f_{{facility.pk}}" value="{{facility.pk}}" {% if facility.pk|slugify in selected_facilities %}checked{% endif %}>
                     </li>
                 {% endfor %}
             </ul>
