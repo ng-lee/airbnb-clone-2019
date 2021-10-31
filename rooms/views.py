@@ -2,7 +2,6 @@ from django.utils import timezone
 from django.http import Http404
 from django.views.generic import ListView, View
 from django.shortcuts import render
-from django_countries import countries
 from . import models, forms
 
 
