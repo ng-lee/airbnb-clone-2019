@@ -14,11 +14,11 @@ class HomeView(ListView):
     paginate_orphans = 5
     ordering = "created"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        now = timezone.now()
-        context["now"] = now
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     now = timezone.now()
+    #     context["now"] = now
+    #     return context
 
 
 def room_detail(request, pk):

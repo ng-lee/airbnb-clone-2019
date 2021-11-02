@@ -6,8 +6,6 @@
 
 {% block content %}
 
-    {{now}}
-
     {% for room in object_list %}
         <h1>
             <a href="{% url 'rooms:detail' room.pk %}">  
