@@ -6,23 +6,28 @@
 
 {% block content %}
 
-    {% for room in object_list %}
-        <h1>
-            <a href="{% url 'rooms:detail' room.pk %}">  
-                {{room.name}} / ${{room.price}}
-            </a>
-        </h1>
-    {% endfor %}
+    <div class="container mx-auto">
+    
+        <div class="rounded-xl bg-gray-800 h-50vh mt-40 mb-20 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1546874177-9e664107314e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80)">
 
-    <h5>
-    {% if page_obj.has_previous %}
-    <a href="?page={{page_obj.previous_page_number}}">Previous<a>
-    {% endif %}
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-    {% if page_obj.has_next %}
-    <a href="?page={{page_obj.next_page_number}}">Next<a>
-    {% endif %}
-    </h5>
+        </div>
+
+        {% for room in object_list %}
+            {% include "partials/room_card.html" with room=room %}
+        {% endfor %}
+
+        <h5>
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">Previous<a>
+            {% endif %}
+                Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">Next<a>
+            {% endif %}
+        </h5>
+
+    </div>
+    
 
 
 {% endblock content %}
