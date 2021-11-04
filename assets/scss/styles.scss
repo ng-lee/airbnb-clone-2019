@@ -19,6 +19,11 @@
   @apply w-full font-bold text-center rounded-sm py-5;
 }
 
+.link-btn {
+  @apply border-2 border-red-500 text-red-500 rounded-lg px-3 py-2 font-bold;
+}
+
+
 .input {
   @apply border-2 border-gray-400 text-left px-5 w-full font-bold rounded-sm py-5;
   &:focus {
