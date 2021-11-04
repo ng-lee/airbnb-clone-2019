@@ -13,12 +13,18 @@
     
         {% include "partials/social_login.html" %}
 
-        
-
         <form method="POST" action="{% url 'users:login' %}" class="w-full">
             {% csrf_token %}
-            {{form.email}}
-            {{form.password}}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    {{error}}
+                {% endfor %}
+            {% endif %}
+
+            {% for field in form %}
+                {% include "mixins/auth/form_input.html" with field=field %}
+            {% endfor %}
             <button class="btn bg-red-500 text-white">Log In</button>
         </form>
 
