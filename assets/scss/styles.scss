@@ -26,4 +26,12 @@
   }
 }
 
+form {
+  .has_error {
+    input {
+      @apply border-red-700 bg-red-300;
+    }
+  }
+}
+
 @tailwind utilities;
