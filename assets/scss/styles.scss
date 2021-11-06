@@ -23,8 +23,7 @@
   @apply border-2 border-red-500 text-red-500 rounded-lg px-3 py-2 font-bold;
 }
 
-
-.input {
+input {
   @apply border-2 border-gray-400 text-left px-5 w-full font-bold rounded-sm py-5;
   &:focus {
     @apply outline-none border-red-500 placeholder-opacity-0;
@@ -32,9 +31,12 @@
 }
 
 form {
-  .has_error {
-    input {
-      @apply border-red-700 bg-red-300;
+  .input {
+    @apply mb-2 w-full;
+    &.has_error {
+      input {
+        @apply border-red-700 bg-red-300;
+      }
     }
   }
 }
