@@ -11,13 +11,13 @@
 
     <div class="container lg:w-5/12 md:w-1/2 xl:w-2/5 mx-auto flex flex-col items-center border p-6 border-gray-400">
     
-        {% include "mixins/auth/auth_form.html" with form=form cta="Update" %}
+        {% include "mixins/auth/auth_form.html" with form=form cta="Update Profile" %}
         
-        {% if object.login_method == models.User.LOGIN_EMAIL %}
+        {% comment %} {% if object.login_method == models.User.LOGIN_EMAIL %} {% endcomment %}
         <div class="mt-5">
-            <a href="{% url 'users:signup' %}" class="link-btn">Change Password</a>
+            <a href="{% url 'users:password' %}" class="link-btn">Change Password</a>
         </div>
-        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
 
     </div>
 
