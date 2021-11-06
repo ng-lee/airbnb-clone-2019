@@ -21,7 +21,7 @@
             <span class="mt-2">{{user_obj.bio}}</span>
             
             {% if user == user_obj %}
-                <a href="#" class="link-btn mt-10">Edit Profile</a>
+                <a href="{% url 'users:update' %}" class="link-btn mt-10">Edit Profile</a>
             {% endif %}
 
         </div>
