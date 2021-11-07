@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+
+{% block page_title %}
+    {{room.name}}
+{% endblock page_title %}
+
+{% block content %}
+    <div class="container max-w-full h-75vh flex mb-20">
+        <div class="h-full w-1/2 bg-cover bg-center border border-gray-700" style="background-image:url({{room.first_photo}})"></div>
+        <div class="h-full w-1/2 flex flex-wrap">
+            {% for photo in room.get_next_four %}
+                <div style="background-image:url({{photo.file.url}})" class="w-1/2 h-auto bg-cover bg-center border border-gray-700"></div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
