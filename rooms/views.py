@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.http import Http404
 from django.views.generic import ListView, View, UpdateView
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
+from users import mixins as user_mixins
 from . import models, forms
 
 
@@ -22,12 +24,9 @@ class HomeView(ListView):
     #     return context
 
 
-def room_detail(request, pk):
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/room_detail.html", {"room": room})
-    except models.Room.DoesNotExist:
-        raise Http404()
+class RoomDetail(DetailView):
+
+    model = models.Room
 
 
 class SearchView(View):
@@ -108,7 +107,7 @@ class SearchView(View):
         )
 
 
-class EditRoomView(UpdateView):
+class EditRoomView(user_mixins.LoggedInOnlyView, UpdateView):
 
     model = models.Room
     template_name = "rooms/room_edit.html"
@@ -131,3 +130,21 @@ class EditRoomView(UpdateView):
         "facilities",
         "house_rules",
     )
+
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset=queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404()
+        return room
+
+
+class RoomPhotosView(user_mixins.LoggedInOnlyView, DetailView):
+
+    model = models.Room
+    template_name = "rooms/room_photos.html"
+
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset=queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404()
+        return room
