@@ -1,6 +1,7 @@
+from django.db.models import fields
 from django.utils import timezone
 from django.http import Http404
-from django.views.generic import ListView, View
+from django.views.generic import ListView, View, UpdateView
 from django.shortcuts import render
 from . import models, forms
 
@@ -105,3 +106,28 @@ class SearchView(View):
                 "rooms": rooms,
             },
         )
+
+
+class EditRoomView(UpdateView):
+
+    model = models.Room
+    template_name = "rooms/room_edit.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
