@@ -10,6 +10,10 @@
 {% block content %}
 
     <div class="container mx-auto flex flex-col">
+        
+        <div class="my-10 w-full justify-center flex">
+            <a href="{% url 'rooms:upload-photo' room.pk %}" class="link-btn w-1/6 block">Upload Photos</a>
+        </div>
     
         {% for photo in room.photos.all %}
             <div class="mb-5 border p-6 border-gray-400 flex justify-between items-center">

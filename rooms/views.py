@@ -1,10 +1,6 @@
-from django.db.models import fields
 from django.http import Http404
-from django.urls import resolvers
-from django.urls.base import reverse_lazy
-from django.views.generic import ListView, View, UpdateView
+from django.views.generic import ListView, View, UpdateView, DetailView, FormView
 from django.shortcuts import render, redirect, reverse
-from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -177,7 +173,23 @@ class EditPhotoView(user_mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateVie
     success_message = "Photo Updated"
     fields = ("caption",)
 
-
     def get_success_url(self):
         room_pk = self.kwargs.get("room_pk")
         return reverse("rooms:photos", kwargs={"pk": room_pk})
+
+
+class UploadPhotoView(user_mixins.LoggedInOnlyView, FormView):
+
+    model = models.Photo
+    template_name = "rooms/photo_upload.html"
+    fields = (
+        "caption",
+        "file",
+    )
+    form_class = forms.CreatePhotoForm
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")
+        form.save(pk)
+        messages.success(self.request, "Photo Uploaded")
+        return redirect(reverse("rooms:photos", kwargs={"pk": pk}))
