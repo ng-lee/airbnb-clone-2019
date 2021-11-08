@@ -1,8 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL
 from django.urls import reverse
 from django_countries.fields import CountryField
 from core import models as core_models
+from cal import Calendar
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -119,3 +121,10 @@ class Room(core_models.TimeStampedModel):
     def get_next_four(self):
         photos = self.photos.all()[1:5]
         return photos
+
+    def get_calendars(self):
+        currentYear = datetime.now().year
+        currentMonth = datetime.now().month
+        this_month = Calendar(currentYear, currentMonth)
+        next_month = Calendar(currentYear, currentMonth+1)
+        return [this_month, next_month]
