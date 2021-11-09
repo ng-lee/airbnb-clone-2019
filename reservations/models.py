@@ -35,6 +35,7 @@ class Reservation(core_models.TimeStampedModel):
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICE,
+        default=STATUS_PENDING,
     )
     check_in = models.DateField()
     check_out = models.DateField()
