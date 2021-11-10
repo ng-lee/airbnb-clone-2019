@@ -67,8 +67,9 @@
     <main class="mx-40 mb-20">{% block content %} {% endblock content %}</main>
 
     {% include "partials/footer.html" %}
+
     <script>
-      const langSelect = document.getElementbyID("js-lang");
+      const langSelect = document.getElementById("js-lang");
       const handleLangChange = () => {
         const selected = langSelect.value;
         fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
@@ -77,3 +78,4 @@
     </script>
   </body>
 </html>
+  
