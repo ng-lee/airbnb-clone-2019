@@ -5,7 +5,7 @@ from . import forms
 
 
 def create_review(request, room):
-    if requset.method == "POST":
+    if request.method == "POST":
         form = forms.CreateReviewForm(request.POST)
         room = room_models.Room.objects.get_or_none(pk=room)
         if not room:
@@ -17,5 +17,3 @@ def create_review(request, room):
             review.save()
             messages.success(request, "Room Reviewed")
             return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
-        else:
-            

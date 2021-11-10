@@ -1,3 +1,19 @@
-<footer class="w-full  mx-auto text-center py-10 border-t font-medium text-gray-500">
-    &copy; 2021 Nbnb, Inc. All rights reserved. Please don't copy us.
+{% load i18n %}
+<footer class="w-full mx-auto text-center py-10 border-t font-medium text-gray-500">
+    <div class="mx-40">
+        <div class="flex flex-col">
+            <span>
+                {% trans "Please don't copy us." %}
+            </span>
+            <span>
+                &copy; 2021 Nbnb, Inc. {% trans "All rights reserved." %}
+            </span>
+        </div>
+        <div class="flex mt-10">
+            <select name="" id="js-lang" class="w-1/5 h-2">
+                <option value="en">English</option>
+                <option value="ko">Korean</option>
+            </select>
+        </div>
+    </div>
 </footer>
