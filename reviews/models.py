@@ -48,3 +48,6 @@ class Review(core_models.TimeStampedModel):
             + self.value
         ) / 6
         return round(avg, 2)
+
+    class Meta:
+        ordering = ("-created",)
