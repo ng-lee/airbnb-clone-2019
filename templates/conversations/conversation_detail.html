@@ -48,6 +48,11 @@
                     </div>
                 {% endfor %}
             {% endif %}
+            <form menthod="POST">
+                {% csrf_token %}
+                <input name="message" placeholder="Write a message">
+                <button class="link-btn">Send Comment</button>
+            </form>
         </div>
 
     </div>
